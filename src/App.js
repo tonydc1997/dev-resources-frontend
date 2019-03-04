@@ -28,7 +28,7 @@ class App extends Component {
     if(localStorage.getItem("display") === null) this.setState({display: "tableview"})
     else this.setState({display: localStorage.getItem("display")})
 
-    fetch('https://dev-resources.herokuapp.com/resource/all')
+    fetch('https://ztmnews.zerobot.xyz/api/resources')
       .then(response => response.json())
       .then(resourceData => { this.setState({ resources: resourceData }) });
     this.routeHandler()
@@ -53,7 +53,7 @@ class App extends Component {
   }
 
   updateUpvotes = (a) => {
-    fetch('https://dev-resources.herokuapp.com/resource/all')
+    fetch('https://ztmnews.zerobot.xyz/api/resources')
       .then(response => response.json())
       .then(resourceData => { this.setState({ resources: resourceData }) });
   }
