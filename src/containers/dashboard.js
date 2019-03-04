@@ -60,7 +60,7 @@ class Dashboard extends Component {
                                 <p className="text-white text-center">This page will eventually contain your favourite/bookmarked resources and various user options, if you logged in by authenticating with Discord</p>
                                 <p className="text-white text-center">{username +'#'+ discriminator}</p>
                                 <p className="text-white text-center" onClick={() => this.props.signer(false)}>logout</p>
-                                <img className="text-center" src={`https://cdn.discordapp.com/avatars/${id}/${avatar}.png`} />
+                                <img className="text-center" src={`https://cdn.discordapp.com/avatars/${id}/${avatar}.png`} alt="avatar" />
                                 <p className="text-white text-center">{guilds}</p>
                             </div>
                         :   <div>
