@@ -67,7 +67,7 @@ class Dashboard extends Component {
                                 <h1 className="text-white text-center mt-3">User Page</h1>
                                 <p className="text-white text-center">This page will eventually contain your favourite/bookmarked resources and various user options, if you logged in by authenticating with Discord</p>
                                 <p >
-                                    <a href=`https://discordapp.com/api/oauth2/authorize?client_id=537744904940683277&redirect_uri=https://rustyresources.herokuapp.com/user/auth/discord/callback&response_type=code&scope=identify%20guilds`>login</a>
+                                    <a href='https://discordapp.com/api/oauth2/authorize?client_id=537744904940683277&redirect_uri=https://rustyresources.herokuapp.com/user/auth/discord/callback&response_type=code&scope=identify%20guilds'>login</a>
                                 </p>
                             </div>
                 }
