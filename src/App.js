@@ -18,6 +18,8 @@ class App extends Component {
     this.state = {
       resources: [],
       route: ``,
+      hoken: ``,
+      isSignedIn: false,
       display: `masonry`,
       baseURL: 'http://dev-resources.herokuapp.com',
       userId: 179604866807627777
@@ -33,13 +35,20 @@ class App extends Component {
       .then(resourceData => { this.setState({ resources: resourceData }) });
     this.routeHandler()
 
-    
   }
 
   componentDidUpdate() {
     history.listen((location, action) => {
       this.routeHandler()
     });
+  }
+
+  tokenUpdater = (key) => {
+      this.setState({hoken: key})
+  }
+
+  signer = (a) => { // true or false
+      this.setState({isSignedIn: a});
   }
 
   changeDisplayType = (opt) => {
@@ -59,14 +68,14 @@ class App extends Component {
   }
 
   displayRoute = () => {
-    
+
     const routes = [
       { path: "",
-        container: 
-          <Home 
-            resources={this.state.resources} 
-            onClick={(slug) => this.changeRoute(`/resource/${slug}`)} 
-            display={this.state.display} 
+        container:
+          <Home
+            resources={this.state.resources}
+            onClick={(slug) => this.changeRoute(`/resource/${slug}`)}
+            display={this.state.display}
             changeDisplay={(opt) => this.changeDisplayType(opt)}
             userId={this.state.userId}
             updateVotes={(a)=> this.updateUpvotes(a)}
@@ -82,7 +91,7 @@ class App extends Component {
       },
       {
         path: "dashboard",
-        container: <Dashboard />
+        container: <Dashboard tokenUpdater={this.tokenUpdater} signer={this.signer} isSignedIn={this.state.isSignedIn}/>
       }
     ]
 
