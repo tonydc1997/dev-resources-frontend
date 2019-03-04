@@ -3,13 +3,14 @@ import './card.css'
 
 const MasonCards = ({ resource, onClick, upvote, userId, hasVoted }) => {
 
-    if(!resource.meta.image) resource.meta.image = "none"
-    if (!resource.meta.image.includes("http") || resource.meta.image.includes("vanguardngr")) resource.meta.image = `https://via.placeholder.com/1500/2e303a/FFFFFF/?text=No%20Image%20Found`
+    const fallbackImage = (e) => {
+        e.target.src = `https://via.placeholder.com/1500/2e303a/FFFFFF/?text=No%20Image%20Found`
+    }
 
         return (
             <div className="p-2" >
                 <div className="card cardRes">
-                    <img className="card-img-top img-respsonsive" src={resource.meta.image} alt={resource.meta.title.slice(0, 15)} onClick={() => onClick(resource.slug)} />
+                    <img className="card-img-top img-respsonsive" src={resource.meta.image} alt={resource.meta.title.slice(0, 15)} onClick={() => onClick(resource.slug)} onError={fallbackImage} />
                     <div className="card-body ">
                         <h1 onClick={() => onClick(resource.slug)}>{resource.meta.title}</h1>
                         <p className="card-text" onClick={() => onClick(resource.slug)}>{resource.meta.description}</p>

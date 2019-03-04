@@ -2,12 +2,16 @@ import React from 'react';
 import './resHeader.css'
 
 const ResHeader = ({ res }) => {
-    console.log(res)
+    
+    const fallbackImage = (e) => {
+        e.target.src = `https://via.placeholder.com/1500/2e303a/FFFFFF/?text=No%20Image%20Found`
+    }
+    
     return (
         <div className="resHeader">
                 <div className="row">
                     <div className="col-md-2">
-                        <img className="img-fluid" src={res.meta.image} alt={`${res.meta.title} Thumbnail`} />
+                        <img className="img-fluid" src={res.meta.image} alt={`${res.meta.title} Thumbnail`} onError={fallbackImage}/>
                     </div>
                     <div className="col-md-10">
                         <a href={res.link}><h1>{res.meta.title}</h1></a>

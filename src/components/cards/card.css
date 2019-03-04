@@ -7,7 +7,7 @@
 
 .cardRes:hover {
     border-color: var(--orange);
-    background: rgba(53, 53, 53, 0.301);
+    background: rgba(53, 53, 53, 0.701);
     -webkit-box-shadow: 8px 10px 21px -9px rgba(207,127,0,0.61);
     -moz-box-shadow: 8px 10px 21px -9px rgba(207,127,0,0.61);
     box-shadow: 8px 10px 21px -9px rgba(207,127,0,0.61);
@@ -66,6 +66,17 @@
     border: 1px solid #f0f0f04d;
     margin-bottom: 10px;
     padding: 5px
+}
+.cardList:hover {
+    border-color: var(--orange);
+    background: rgba(53, 53, 53, 0.701);
+    -webkit-box-shadow: 8px 10px 21px -9px rgba(207,127,0,0.61);
+    -moz-box-shadow: 8px 10px 21px -9px rgba(207,127,0,0.61);
+    box-shadow: 8px 10px 21px -9px rgba(207,127,0,0.61);
+}
+
+.cardList-body {
+    cursor: pointer;
 }
 
 .cardList h2 {
