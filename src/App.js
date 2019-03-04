@@ -33,7 +33,7 @@ class App extends Component {
       .then(resourceData => { this.setState({ resources: resourceData }) });
     this.routeHandler()
 
-    
+
   }
 
   componentDidUpdate() {
@@ -59,14 +59,14 @@ class App extends Component {
   }
 
   displayRoute = () => {
-    
+
     const routes = [
       { path: "",
-        container: 
-          <Home 
-            resources={this.state.resources} 
-            onClick={(slug) => this.changeRoute(`/resource/${slug}`)} 
-            display={this.state.display} 
+        container:
+          <Home
+            resources={this.state.resources}
+            onClick={(slug) => this.changeRoute(`/resource/${slug}`)}
+            display={this.state.display}
             changeDisplay={(opt) => this.changeDisplayType(opt)}
             userId={this.state.userId}
             updateVotes={(a)=> this.updateUpvotes(a)}

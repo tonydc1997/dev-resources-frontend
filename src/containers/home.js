@@ -37,7 +37,7 @@ const Home = ({ resources, onClick, display, changeDisplay, userId, updateVotes 
             <div className={cardView[display]}>
                 {
                     Object.keys(resources).map((res, i) => {
-                        console.log(resources[res])
+                        // console.log(resources[res])
                         if (display === "tableview") return <ListCards key={i} resource={resources[res]} onClick={onClick} upvote={() => submitUpvote(resources[res].slug)} hasVoted={hasVoted(resources[res].upvotes, userId)} />
                         else return <MasonCards key={i} resource={resources[res]} onClick={onClick} upvote={() => submitUpvote(resources[res].slug)} hasVoted={hasVoted(resources[res].upvotes, userId)} />
                     })
