@@ -9,7 +9,7 @@ if(key == null) {
 } else {
     localStorage.setItem("hoken", key);
     localStorage.setItem("uid", uid)
-    window.location.href = "http://localhost:3000/dashboard"
+    window.location.href = "https://rustyresources.herokuapp.com/dashboard"
 }
 console.log(localStorage.getItem("hoken"));
 console.log(localStorage.getItem("uid"));
@@ -24,7 +24,7 @@ class Dashboard extends Component {
 
     componentDidMount() {
 
-        fetch('http://localhost:3001/profile', {
+        fetch('https://dev-resources.herokuapp.com/profile', {
               method: 'post',
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({
