@@ -3,7 +3,7 @@ import './mainSidebar.css';
 import rusty from '../../images/rusty.png';
 import rr from '../../images/rr.png';
 
-const MainSidebar = () => {
+const MainSidebar = ({changeRoute}) => {
 
     return (
         <nav className="main-menu">
@@ -17,58 +17,58 @@ const MainSidebar = () => {
 
             <ul>
                 <li>
-                    <a href="/">
+                    <button onClick={(r) => changeRoute("")}>
                         <i className="fa fa-home fa-2x"></i>
                         <span className="nav-text">
                             Home
                         </span>
-                    </a>
+                    </button>
                 </li>
                 <li className="has-subnav">
-                    <a href="/about">
+                    <button onClick={(r) => changeRoute("about")}>
                         <i className="fa fa-laptop fa-2x"></i>
                         <span className="nav-text">
                             About
                         </span>
-                    </a>
+                    </button>
                 </li>
                 <hr ></hr>
                 <li className="has-subnav">
-                    <a href="/top">
+                    <button onClick={(r) => changeRoute("top")}>
                         <i className="fa fa-trophy fa-2x"></i>
                         <span className="nav-text">
                             Top Resources
                         </span>
-                    </a>
+                    </button>
                     
                 </li>
                 <li className="has-subnav">
-                    <a href="/new">
+                    <button onClick={(r) => changeRoute("new")}>
                        <i className="fa fa-clock fa-2x"></i>
                         <span className="nav-text">
                             New Resources
                         </span>
-                    </a>
+                    </button>
                    
                 </li>
                 <li>
-                    <a href="most-viewed">
+                    <button onClick={(r) => changeRoute("popular")}>
                         <i className="fa fa-eye fa-2x"></i>
                         <span className="nav-text">
                             Most Viewed
                         </span>
-                    </a>
+                    </button>
                 </li>
             </ul>
 
             <ul className="dashboard">
                 <li>
-                   <a href="/dashboard">
+                    <button onClick={(r) => changeRoute("dashboard")}>
                          <i className="fa fa-user-circle fa-2x"></i>
                         <span className="nav-text">
                             Dashboard
                         </span>
-                    </a>
+                    </button>
                 </li>  
             </ul>
         </nav>

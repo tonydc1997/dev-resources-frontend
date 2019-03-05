@@ -53,7 +53,11 @@
     width: 250px;
 }
 
-.main-menu li>a {
+.main-menu li>button {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0; 
     position: relative;
     display: table;
     border-collapse: collapse;
@@ -72,7 +76,7 @@
     display: table-cell;
     width: 60px;
     height: 36px;
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
     font-size: 18px;
 }
@@ -82,6 +86,7 @@
     display: table-cell;
     vertical-align: middle;
     width: 190px;
+    text-align: left;
     font-family: 'Titillium Web', sans-serif;
 }
 
@@ -100,7 +105,7 @@
     overflow: visible;
 }
 
-a:hover, a:focus {
+button:hover, button:focus {
     text-decoration: none;
 }
 
@@ -118,7 +123,7 @@ nav ul, nav li {
     padding: 0;
 }
 
-.main-menu li:hover>a, nav.main-menu li.active>a, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus, .no-touch .dashboard-page nav.dashboard-menu ul li:hover a, .dashboard-page nav.dashboard-menu ul li.active a {
+.main-menu li:hover>button, nav.main-menu li.active>a, .dropdown-menu>li>button:hover, .dropdown-menu>li>button:focus, .dropdown-menu>.active>button, .dropdown-menu>.active>button:hover, .dropdown-menu>.active>button:focus, .no-touch .dashboard-page nav.dashboard-menu ul li:hover button, .dashboard-page nav.dashboard-menu ul li.active button {
     color: #fff;
     background-color: #9d5d27;
 }
