@@ -2,6 +2,8 @@
    --orange: #cf7f00;
   }
 
+  button:focus {outline:0;}
+
   .speech-bubble {
     position: relative;
     background: #fff3cd;

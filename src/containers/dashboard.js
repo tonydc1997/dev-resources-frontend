@@ -11,8 +11,6 @@ if(key == null) {
     localStorage.setItem("uid", uid)
     window.location.href = "https://rustyresources.herokuapp.com/dashboard"
 }
-console.log(localStorage.getItem("hoken"));
-console.log(localStorage.getItem("uid"));
 
 class Dashboard extends Component {
     constructor(props) {
@@ -55,15 +53,16 @@ class Dashboard extends Component {
             <div className="App">
                 {
                     this.props.isSignedIn
-                        ?   <div>
+                        ?   <div className="text-center">
                                 <h1 className="text-white text-center mt-3">User Page</h1>
                                 <p className="text-white text-center">This page will eventually contain your favourite/bookmarked resources and various user options, if you logged in by authenticating with Discord</p>
-                                <p className="text-white text-center">{username +'#'+ discriminator}</p>
-                                <p className="text-white text-center" onClick={() => this.props.signer(false)}>logout</p>
+                                <h1 className="text-white text-center">{username +'#'+ discriminator}</h1>
+                                <button type="button" class="btn btn-outline-warning" onClick={() => this.props.signer(false)}>Logout</button>
+                                <hr/>
                                 <img className="text-center" src={`https://cdn.discordapp.com/avatars/${id}/${avatar}.png`} alt="avatar" />
                                 <p className="text-white text-center">{guilds}</p>
                             </div>
-                        :   <div>
+                        :   <div className="text-center">
                                 <h1 className="text-white text-center mt-3">User Page</h1>
                                 <p className="text-white text-center">This page will eventually contain your favourite/bookmarked resources and various user options, if you logged in by authenticating with Discord</p>
                                 <p >
