@@ -19,6 +19,8 @@ class App extends Component {
     this.state = {
       resources: [],
       route: ``,
+      hoken: ``,
+      isSignedIn: false,
       display: `masonry`,
       backendBaseURL: 'http://dev-resources.herokuapp.com',
       frontendBaseURL: window.location.hostname,
@@ -36,8 +38,7 @@ class App extends Component {
       .then(resourceData => { this.setState({ resources: resourceData }) });
     this.routeHandler()
 
-
-this.contribs()
+    this.contribs()
 
   }
 
@@ -63,6 +64,14 @@ this.contribs()
     history.listen((location, action) => {
       this.routeHandler()
     });
+  }
+
+  tokenUpdater = (key) => {
+      this.setState({hoken: key})
+  }
+
+  signer = (a) => { // true or false
+      this.setState({isSignedIn: a});
   }
 
   changeDisplayType = (opt) => {
@@ -110,7 +119,7 @@ this.contribs()
       },
       {
         path: "dashboard",
-        container: <Dashboard />
+        container: <Dashboard tokenUpdater={this.tokenUpdater} signer={this.signer} isSignedIn={this.state.isSignedIn}/>
       }
     ]
     let matchedRoute = routes.find(route => route.path === this.state.route)
