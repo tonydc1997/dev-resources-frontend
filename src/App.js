@@ -22,7 +22,7 @@ class App extends Component {
       hoken: ``,
       isSignedIn: false,
       display: `masonry`,
-      backendBaseURL: 'http://dev-resources.herokuapp.com',
+      backendBaseURL: 'https://dev-resources.herokuapp.com',
       frontendBaseURL: window.location.hostname,
       userId: 179604866807627777,
       contribs: []
@@ -32,6 +32,12 @@ class App extends Component {
   componentDidMount() {
     if (localStorage.getItem("display") === null) this.setState({ display: "tableview" })
     else this.setState({ display: localStorage.getItem("display") })
+
+    if(localStorage.getItem('hoken')) {
+        this.setState({isSignedIn: true})
+    } else {
+        this.setState({isSignedIn: false})
+    }
 
     fetch(`${this.state.backendBaseURL}/resource/all`)
       .then(response => response.json())
