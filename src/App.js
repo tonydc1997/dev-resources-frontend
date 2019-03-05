@@ -7,6 +7,7 @@ import User from './containers/user';
 import Dashboard from './containers/dashboard';
 import NotFound from './containers/404';
 import './App.css'
+import About from './containers/about';
 
 // Listens for URL Changes
 const history = createBrowserHistory();
@@ -21,20 +22,42 @@ class App extends Component {
       hoken: ``,
       isSignedIn: false,
       display: `masonry`,
-      baseURL: 'http://dev-resources.herokuapp.com',
-      userId: 179604866807627777
+      backendBaseURL: 'http://dev-resources.herokuapp.com',
+      frontendBaseURL: window.location.hostname,
+      userId: 179604866807627777,
+      contribs: []
     }
   }
 
   componentDidMount() {
-    if(localStorage.getItem("display") === null) this.setState({display: "tableview"})
-    else this.setState({display: localStorage.getItem("display")})
+    if (localStorage.getItem("display") === null) this.setState({ display: "tableview" })
+    else this.setState({ display: localStorage.getItem("display") })
 
-    fetch('https://dev-resources.herokuapp.com/resource/all')
+    fetch(`${this.state.backendBaseURL}/resource/all`)
       .then(response => response.json())
       .then(resourceData => { this.setState({ resources: resourceData }) });
     this.routeHandler()
 
+    this.contribs()
+
+  }
+
+  contribs = async () => {
+    await fetch(`${this.state.backendBaseURL}/contributors`)
+      .then(response => response.json())
+      .then(async (data) => {
+        let contributions = [];
+        await data.front.forEach(c => {
+          contributions[c.login] = { name: c.login, avatar: c.avatar_url, fContribs: c.contributions, url: c.html_url }
+        });
+
+        await data.back.forEach(c => {
+          if (contributions[c.login]) contributions[c.login]["bContribs"] = c.contributions;
+          else contributions[c.login] = { name: c.login, avatar: c.avatar_url, bContribs: c.contributions, url: c.html_url }
+        })
+
+        return contributions
+      }).then(abx => this.setState({contribs: abx}))
   }
 
   componentDidUpdate() {
@@ -52,17 +75,17 @@ class App extends Component {
   }
 
   changeDisplayType = (opt) => {
-    this.setState({display: opt})
+    this.setState({ display: opt })
     localStorage.setItem("display", opt);
   }
 
   routeHandler = () => {
     const sections = window.location.pathname.slice(1).split("/")
-    this.setState({route: sections[0], path: sections[1]})
+    this.setState({ route: sections[0], path: sections[1] })
   }
 
   updateUpvotes = (a) => {
-    fetch('https://dev-resources.herokuapp.com/resource/all')
+    fetch(`${this.state.backendBaseURL}/resource/all`)
       .then(response => response.json())
       .then(resourceData => { this.setState({ resources: resourceData }) });
   }
@@ -70,7 +93,8 @@ class App extends Component {
   displayRoute = () => {
 
     const routes = [
-      { path: "",
+      {
+        path: "",
         container:
           <Home
             resources={this.state.resources}
@@ -78,23 +102,26 @@ class App extends Component {
             display={this.state.display}
             changeDisplay={(opt) => this.changeDisplayType(opt)}
             userId={this.state.userId}
-            updateVotes={(a)=> this.updateUpvotes(a)}
+            updateVotes={(a) => this.updateUpvotes(a)}
           />
       },
       {
         path: "resource",
-        container: <Resource res={this.state.resources} id={this.state.path}/>
+        container: <Resource res={this.state.resources} id={this.state.path} />
       },
       {
         path: "user",
         container: <User />
       },
       {
+        path: "about",
+        container: <About data={this.state.contribs} />
+      },
+      {
         path: "dashboard",
         container: <Dashboard tokenUpdater={this.tokenUpdater} signer={this.signer} isSignedIn={this.state.isSignedIn}/>
       }
     ]
-
     let matchedRoute = routes.find(route => route.path === this.state.route)
     return matchedRoute ? matchedRoute.container : <NotFound />
 
@@ -107,7 +134,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MainSidebar />
+        <MainSidebar changeRoute={(r) => this.changeRoute(r)}/>
         {this.displayRoute()}
       </div>
     );
