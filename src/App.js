@@ -22,7 +22,7 @@ class App extends Component {
       hoken: ``,
       isSignedIn: false,
       display: `masonry`,
-      backendBaseURL: 'http://dev-resources.herokuapp.com',
+      backendBaseURL: 'https://dev-resources.herokuapp.com',
       frontendBaseURL: window.location.hostname,
       userId: 179604866807627777,
       contribs: []
