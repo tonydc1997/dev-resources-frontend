@@ -4,7 +4,10 @@ import rusty from '../../images/rusty.png';
 import rr from '../../images/rr.png';
 
 const MainSidebar = ({changeRoute}) => {
-
+    const isAuthed = () => {
+        if(localStorage.getItem("uid") && localStorage.getItem("hoken")) return "Dashboard"
+        else return "Login"
+    }
     return (
         <nav className="main-menu">
 
@@ -66,7 +69,7 @@ const MainSidebar = ({changeRoute}) => {
                     <button onClick={(r) => changeRoute("dashboard")}>
                          <i className="fa fa-user-circle fa-2x"></i>
                         <span className="nav-text">
-                            Dashboard
+                            {isAuthed()}
                         </span>
                     </button>
                 </li>  
