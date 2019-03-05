@@ -5,7 +5,7 @@ const urlParams = new URLSearchParams(window.location.search)
 const key = urlParams.get('val');
 const uid = urlParams.get('uid');
 if(key == null) {
-    console.log(localStorage.getItem("display"));
+    console.log('null');
 } else {
     localStorage.setItem("hoken", key);
     localStorage.setItem("uid", uid)
@@ -22,7 +22,7 @@ class Dashboard extends Component {
 
     componentDidMount() {
 
-        fetch('https://dev-resources.herokuapp.com/profile', {
+        fetch('http://dev-resources.herokuapp.com/profile', {
               method: 'post',
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({
@@ -32,22 +32,17 @@ class Dashboard extends Component {
             })
               .then(response => response.json())
               .then(user => {
-                  console.log('userrrrrrr', user);
-                if (user.id) {
+                if (user.payload.id) {
+                    console.log(user.payload);
                     this.props.signer(true);
-                    // this.isSignedIn= true;
-                    this.setState({profile: user})
+                    this.setState({profile: user.payload})
                 }
               })
     }
 
-    urlFormat = () => {
-
-    }
-
     render() {
 
-        const {username, id, avatar, discriminator, guilds} = this.state.profile;
+        const {username, id, avatar, discriminator} = this.state.profile;
 
         return(
             <div className="App">
@@ -56,11 +51,16 @@ class Dashboard extends Component {
                         ?   <div className="text-center">
                                 <h1 className="text-white text-center mt-3">User Page</h1>
                                 <p className="text-white text-center">This page will eventually contain your favourite/bookmarked resources and various user options, if you logged in by authenticating with Discord</p>
-                                <h1 className="text-white text-center">{username +'#'+ discriminator}</h1>
-                                <button type="button" class="btn btn-outline-warning" onClick={() => this.props.signer(false)}>Logout</button>
-                                <hr/>
-                                <img className="text-center" src={`https://cdn.discordapp.com/avatars/${id}/${avatar}.png`} alt="avatar" />
-                                <p className="text-white text-center">{guilds}</p>
+                                {
+                                    this.state.profile.username === undefined
+                                        ?   <h1 className="text-white text-center">Loading ...</h1>
+                                        :   <div>
+                                                <h1 className="text-white text-center">{username+'#'+discriminator}</h1>
+                                                <button type="button" className="btn btn-outline-warning" onClick={() => this.props.signer(false)}>Logout</button>
+                                                <hr/>
+                                                <img className="text-center" src={`https://cdn.discordapp.com/avatars/${id}/${avatar}.png`} alt="avatar" />
+                                            </div>
+                                }
                             </div>
                         :   <div className="text-center">
                                 <h1 className="text-white text-center mt-3">User Page</h1>

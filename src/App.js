@@ -33,6 +33,12 @@ class App extends Component {
     if (localStorage.getItem("display") === null) this.setState({ display: "tableview" })
     else this.setState({ display: localStorage.getItem("display") })
 
+    if(localStorage.getItem('hoken')) {
+        this.setState({isSignedIn: true})
+    } else {
+        this.setState({isSignedIn: false})
+    }
+
     fetch(`${this.state.backendBaseURL}/resource/all`)
       .then(response => response.json())
       .then(resourceData => { this.setState({ resources: resourceData }) });
